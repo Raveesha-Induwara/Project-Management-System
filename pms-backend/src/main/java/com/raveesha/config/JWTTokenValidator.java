@@ -22,13 +22,20 @@ import java.util.List;
 public class JWTTokenValidator extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String jwt = request.getHeader(JWTConstant.JWT_HEADER);
+        String authHeader = request.getHeader(JWTConstant.JWT_HEADER);
+        String token = null;
         
-        if (jwt != null) {
-            jwt = jwt.substring(7);
+        // Bearer jwtToken
+        if (authHeader != null && authHeader.startsWith("Bearer ")) {
+            token = authHeader.substring(7);
+            
             try {
-                 SecretKey key = Keys.hmacShaKeyFor(JWTConstant.SECRETE_KEY.getBytes());
-                Claims claims = Jwts.parser().setSigningKey(key).build().parseClaimsJws(jwt).getBody();
+                SecretKey key = Keys.hmacShaKeyFor(JWTConstant.SECRETE_KEY.getBytes());
+                Claims claims = Jwts.parser()
+                                        .verifyWith(key)
+                                        .build()
+                                        .parseSignedClaims(token)
+                                        .getPayload();
                 
                 String email = String.valueOf(claims.get("email"));
                 String authorities = String.valueOf((claims.get("authorities")));
