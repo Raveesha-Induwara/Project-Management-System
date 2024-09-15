@@ -19,5 +19,11 @@ public class Invitation {
     
     private String email;
     private String token;
-    private String projectId;
+    private Long projectId;
+    
+    public Invitation(String email, String token, Long projectId) {
+        this.email = email;
+        this.token = token;
+        this.projectId = projectId;
+    }
 }

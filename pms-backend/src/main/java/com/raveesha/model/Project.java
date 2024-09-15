@@ -25,16 +25,16 @@ public class Project {
     
     private List<String> tags = new ArrayList<>();
     
+    @ManyToOne
+    private User owner;
+    
+    @ManyToMany
+    private List<User> team = new ArrayList<>();
+    
     @JsonIgnore
     @OneToOne(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
     private Chat chat;
     
-    @ManyToOne
-    private User owner;
-    
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Issue> issues = new ArrayList<>();
-    
-    @ManyToMany
-    private List<User> team = new ArrayList<>();
 }
