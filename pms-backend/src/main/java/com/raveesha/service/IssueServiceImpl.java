@@ -35,15 +35,19 @@ public class IssueServiceImpl implements IssueService{
     }
     
     @Override
-    public Issue createIssue(IssueRequestDto issueRequest, User user) throws Exception {
-        Project project = projectService.getProjectById(issueRequest.getProjectId());
-        Issue issue = new Issue(issueRequest.getTitle(),
-                issueRequest.getDescription(),
-                issueRequest.getStatus(),
-                issueRequest.getProjectId(),
-                issueRequest.getPriority(),
-                issueRequest.getDueDate());
+    public Issue createIssue(IssueRequestDto issueDto, User user) throws Exception {
+        Project project = projectService.getProjectById(issueDto.getProjectId());
+        Issue issue = new Issue();
+        
+        issue.setTitle(issueDto.getTitle());
+        issue.setDescription(issueDto.getDescription());
+        issue.setStatus(issueDto.getStatus());
         issue.setProject(project);
+        issue.setProjectId(issueDto.getProjectId());
+        issue.setPriority(issueDto.getPriority());
+        issue.setDueDate(issueDto.getDueDate());
+        issue.setTags(issueDto.getTags());
+        issue.setAssignee(issueDto.getAssignee());
         return issueRepo.save(issue);
     }
     

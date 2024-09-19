@@ -35,13 +35,4 @@ public class Issue {
     @JsonIgnore
     @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
-    
-    public Issue(String title, String description, String status, Long projectId, String priority, LocalDate dueDate) {
-        this.title = title;
-        this.description = description;
-        this.status = status;
-        this.projectId = projectId;
-        this.priority = priority;
-        this.dueDate = dueDate;
-    }
 }
