@@ -20,7 +20,7 @@ public class Message {
     private String content;
     private LocalDateTime createdAt;
     
-    @ManyToOne()
+    @ManyToOne
     private Chat chat;
     
     @ManyToOne
