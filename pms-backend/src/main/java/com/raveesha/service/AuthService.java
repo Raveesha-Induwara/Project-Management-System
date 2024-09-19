@@ -27,6 +27,8 @@ public class AuthService {
     private JwtProvider jwtProvider;
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
+    @Autowired
+    private SubscriptionService subscriptionService;
     
     public ResponseEntity<AuthResponseDto> signupUserHandler(SignupRequestDto request) throws Exception {
         User isUserExist = userRepo.findByEmail(request.getEmail());
@@ -40,6 +42,8 @@ public class AuthService {
         newUser.setEmail(request.getEmail());
         newUser.setFullName(request.getFullName());
         userRepo.save(newUser);
+        
+        subscriptionService.createSubscription(newUser);
         
         Authentication authentication = new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword());
         SecurityContextHolder.getContext().setAuthentication(authentication);
