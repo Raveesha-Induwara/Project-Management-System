@@ -8,13 +8,12 @@ import com.raveesha.service.IssueService;
 import com.raveesha.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
-@RestController(value = "/api/issue")
+@RestController
+@RequestMapping(value = "/api/issue")
 public class IssueController {
     @Autowired
     private UserService userService;
