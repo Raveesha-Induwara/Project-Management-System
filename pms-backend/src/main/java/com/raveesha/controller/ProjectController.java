@@ -26,7 +26,7 @@ public class ProjectController {
     @Autowired
     private InvitationService invitationService;
     
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<List<Project>> getProjects(
             @RequestParam(required = false) String category,
             @RequestParam(required = false) String tag,
@@ -47,7 +47,7 @@ public class ProjectController {
         return new ResponseEntity<>(project, HttpStatus.OK);
     }
     
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<Project> createProject(
             @RequestBody Project project,
             @RequestHeader("Authorization") String jwt

@@ -32,7 +32,7 @@ public class IssueController {
         return ResponseEntity.ok(issueService.getIssueByProjectId(projectId));
     }
     
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<Issue> createIssue(@RequestBody IssueRequestDto issueDto,
                                              @RequestHeader("Authorization") String token) throws Exception {
         User user = userService.findUserProfileByJwt(token);

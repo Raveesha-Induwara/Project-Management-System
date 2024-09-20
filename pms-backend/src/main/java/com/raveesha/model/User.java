@@ -1,6 +1,7 @@
 package com.raveesha.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -16,8 +17,10 @@ public class User {
     
     private String fullName;
     private String email;
-    private String password;
     private int projectSize;
+    
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private String password;
     
     @JsonIgnore
     @OneToMany(mappedBy = "assignee", cascade = CascadeType.ALL)

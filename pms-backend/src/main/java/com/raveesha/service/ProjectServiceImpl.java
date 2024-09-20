@@ -24,12 +24,12 @@ public class ProjectServiceImpl implements ProjectService{
     @Override
     public Project createProject(Project project, User user) throws Exception {
         Project newProject = new Project();
-        newProject.setName(project.getName());
-        newProject.setCategory(project.getCategory());
-        newProject.setOwner(project.getOwner());
-        newProject.setDescription(project.getDescription());
-        newProject.setTags(project.getTags());
+        newProject.setOwner(user);
         newProject.getTeam().add(user);
+        newProject.setName(project.getName());
+        newProject.setTags(project.getTags());
+        newProject.setCategory(project.getCategory());
+        newProject.setDescription(project.getDescription());
         
         Project savedProject = projectRepo.save(newProject);
         
