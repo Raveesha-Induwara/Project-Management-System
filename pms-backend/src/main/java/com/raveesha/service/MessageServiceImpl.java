@@ -16,8 +16,6 @@ public class MessageServiceImpl implements MessageService{
     @Autowired
     private ProjectService projectService;
     @Autowired
-    private UserService userService;
-    @Autowired
     private UserRepository userRepo;
     @Autowired
     private MessageRepository messageRepo;
@@ -35,7 +33,7 @@ public class MessageServiceImpl implements MessageService{
         message.setCreatedAt(LocalDateTime.now());
         Message savedMessage = messageRepo.save(message);
         
-        chat.getMessages().add((org.apache.logging.log4j.message.Message) savedMessage);
+        chat.getMessages().add(savedMessage);
         return savedMessage;
     }
     

@@ -3,7 +3,6 @@ package com.raveesha.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
-import org.apache.logging.log4j.message.Message;
 
 import java.util.ArrayList;
 import java.util.List;
